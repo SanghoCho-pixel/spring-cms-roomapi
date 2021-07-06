@@ -7,6 +7,7 @@ import org.springframework.context.annotation.Lazy;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -20,9 +21,9 @@ public class Room {
 
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "WS_ID")
+    @Id
     private UUID Id;
 
-    @Id
     @Column(name = "WS_NAME")
     private String name;
 
@@ -35,5 +36,6 @@ public class Room {
     private LocalDateTime modiDate;
 
     @OneToMany(mappedBy = "room")
-    private List<Member> memberList;
+    @Builder.Default
+    private List<Member> memberList = new ArrayList<Member>();
 }

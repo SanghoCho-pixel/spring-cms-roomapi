@@ -11,14 +11,17 @@ import java.util.UUID;
 
 @Entity
 @Getter
+@Setter
 @Builder
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
 @Table(name = "TB_MAP_WS_USER_TEST")
+@ToString
 public class Member implements Serializable {
 
-    @Id
+    @GeneratedValue(strategy =GenerationType.AUTO )
     @Column(name = "USER_ID")
+    @Id
     private UUID memberId;
 
     @Column(name = "MAP_REGI_DATE")
@@ -29,8 +32,8 @@ public class Member implements Serializable {
     @UpdateTimestamp
     private LocalDateTime modiDate;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "WS_ID", insertable = false, updatable = false)
+    @ManyToOne
+    @JoinColumn(name = "room_WS_ID", insertable = false, updatable = false)
     private Room room;
 
 }

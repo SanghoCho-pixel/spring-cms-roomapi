@@ -6,11 +6,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/CMS/room-api")
+@RequestMapping("/CMS/rooms")
 public class RoomController {
 
     private final RoomRepository roomRepository;
@@ -28,7 +26,7 @@ public class RoomController {
     @GetMapping("/get/{roomName}")
     @Transactional
     public Room getRoom(@PathVariable("roomName") String name) {
-        return roomRepository.find(name);
+        return roomRepository.find(name).orElse(null);
     }
 
 
